@@ -9,35 +9,35 @@ import Link from '@material-ui/core/Link';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from "@material-ui/styles";
 
-const theme = createMuiTheme({
-    typography: {
-      
-    }
+const useStyles = makeStyles({
+    root: {
+      backgroundColor: 'transparent',
+      border: 0,
+      color: 'white',
+      height: 48,
+      fontWeight: 'bold',
+      padding: '0 30px',
+    },
   });
 
 export default function Navbar() {
 
+    const classes = useStyles();
 
     return (
-        <ThemeProvider theme={theme}>
-            <typography fontWeight={'fontWeight'} >HOLAMUNDO</typography>
-        </ThemeProvider>
-    )
-
-    // return (
-    //     <div>
-    //         <AppBar position="static">
-    //             <Toolbar>
-    //                 <IconButton edge="start" color="inherit" aria-label="menu">
-    //                     <MenuIcon />
-    //                 </IconButton>
-    //                 <Link to="/" color={'inherit'}>
-    //                     <Button variant="contained" color="primary" disableElevation>
-    //                         Inicio
-    //                     </Button>
-    //                 </Link>
-    //             </Toolbar>
-    //         </AppBar>
-    //     </div>
-    // );
+        <div>
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
+                    <Link to="/" color={'inherit'}>
+                        <Button variant="contained" className={classes.root} disableElevation>
+                            Inicio
+                        </Button>
+                    </Link>
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 }
