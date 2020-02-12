@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import Navbar from './components/Navbar/'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Navbar from './components/Navbar/';
+import About from './components/About';
 
 const useStyles = makeStyles({
   root: {
@@ -15,6 +16,15 @@ function App() {
   return (
     <div>
       <Navbar />
+      <BrowserRouter>
+        <div>
+          <Switch>
+            <Route
+              path="/about"
+              component={About} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     </div>
 
   );

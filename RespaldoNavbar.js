@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles,withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
@@ -13,10 +13,9 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
-import PanToolIcon from '@material-ui/icons/PanTool';
 import crecicLogo from '../../images/crecicLogo.png';
 import { Typography, Grid } from '@material-ui/core';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route }  from 'react-router-dom';
 import About from '../About';
 
 const useStyles = makeStyles({
@@ -93,7 +92,7 @@ export default function Navbar() {
             spacing={24}
           >
 
-<Grid item>
+            <Grid item>
               <IconButton edge="start" color="inherit" aria-label="menu"></IconButton>
               <Link to="/about" color={'inherit'}>
                 <Button variant="contained" color="primary" className={classes.buttonMod} disableElevation>
@@ -193,11 +192,11 @@ export default function Navbar() {
             </Grid>
 
             <Grid item>
-              <div style={{ marginTop: '5px' }}>
-                <Typography variant="h6" gutterBottom>
-                  <span>Semdat &nbsp;</span>
-                  <img src={crecicLogo} style={{ width: '1em', marginTop: '10px', marginBottom: '-3px' }} />
-                </Typography>
+              <div style={{marginTop: '5px'}}>
+              <Typography variant="h6" gutterBottom>
+                <span>Semdat &nbsp;</span>
+                <img src={crecicLogo} style={{width: '1em', marginTop: '10px', marginBottom: '-3px'}}/>
+              </Typography>
               </div>
             </Grid>
 
