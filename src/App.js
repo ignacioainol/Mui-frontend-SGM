@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/';
 import Home from './components/Home/';
-import About from './components/About/';
+import Administracion from './components/Administracion/';
 
 const useStyles = makeStyles({
   root: {
@@ -19,7 +19,7 @@ function App() {
       <Router>
         <Navbar />
         <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
+        <Route path="/administracion" component={Administracion} />
       </Router>
     </div>
   );

@@ -123,7 +123,8 @@ const MyNetwork = () => {
               color:{border:'white'}
           }
       },
-      height: "500px"
+      width: "100%",
+      height: "550px"
   };
 
     const events = {
@@ -138,6 +139,7 @@ const MyNetwork = () => {
         events={events}
         getNetwork={network => {
           //  if you want access to vis.js network api you can set the state in a parent component using this property
+          network.focus(18, {scale: 0.8})
         }}
       />
     );
@@ -149,7 +151,6 @@ function Home() {
   const classes = useStyles;
   return (
     <div>
-      <h1>Home</h1>
       <MyNetwork />
     </div>
 
