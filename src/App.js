@@ -2,7 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/';
-import About from './components/About';
+import Home from './components/Home/';
+import About from './components/About/';
 
 const useStyles = makeStyles({
   root: {
@@ -14,10 +15,13 @@ function App() {
 
   const classes = useStyles;
   return (
-    <Router>
-      <Navbar />
-        <Route exact path="/about" component={About} />   
-    </Router>
+    <div style={{ backgroundColor: '#222222', height: '100vh'}}>
+      <Router>
+        <Navbar />
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+      </Router>
+    </div>
   );
 }
 
