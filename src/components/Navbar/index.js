@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -13,11 +12,9 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
-import PanToolIcon from '@material-ui/icons/PanTool';
 import crecicLogo from '../../images/crecicLogo.png';
 import { Typography, Grid } from '@material-ui/core';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import About from '../About';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   buttonMod: {
@@ -93,9 +90,9 @@ export default function Navbar() {
             spacing={24}
           >
 
-<Grid item>
+            <Grid item>
               <IconButton edge="start" color="inherit" aria-label="menu"></IconButton>
-              <Link to="/about" color={'inherit'}>
+              <Link to="/" color={'inherit'}>
                 <Button variant="contained" color="primary" className={classes.buttonMod} disableElevation>
                   Inicio
                 </Button>

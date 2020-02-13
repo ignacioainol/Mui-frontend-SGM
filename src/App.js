@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/';
 import About from './components/About';
 
@@ -14,19 +14,10 @@ function App() {
 
   const classes = useStyles;
   return (
-    <div>
+    <Router>
       <Navbar />
-      <BrowserRouter>
-        <div>
-          <Switch>
-            <Route
-              path="/about"
-              component={About} />
-          </Switch>
-        </div>
-      </BrowserRouter>
-    </div>
-
+        <Route exact path="/about" component={About} />   
+    </Router>
   );
 }
 
