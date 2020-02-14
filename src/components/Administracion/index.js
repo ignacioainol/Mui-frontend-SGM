@@ -32,7 +32,7 @@ function Administracion() {
   const handleChangeSystem = async (event) => {
 
     try {
-      const schemas = RelationRepository.getSchemas('sgm');
+      const schemas = await RelationRepository.getSystems();
       console.log(schemas);
     } catch (error) {
       console.log(error);

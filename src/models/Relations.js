@@ -5,11 +5,13 @@ class RelationRepository {
 
     static async getSystems () {
         try {
-            const res =  axios.get(`${process.env.RESTURL_SPEAKERS}relations/systems`)
-                .then(res => {
-                    const systems = res.data();
-                    return systems;
-                })
+            const res = await axios.get(`http://localhost:5001/relations/systems`)
+                // .then(res => {
+                //     const systems = res.data();
+                //     return systems;
+                // })
+
+                return Promise.resolve(await res.data());
             
         } catch (error) {
             return Promise.reject(error);
