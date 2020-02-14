@@ -15,7 +15,7 @@ function App() {
 
   const classes = useStyles;
   return (
-    <div style={{ backgroundColor: '#222222', height: '100vh'}}>
+    <div style={{ backgroundColor: 'transparent', height: '100vh'}}>
       <Router>
         <Navbar />
         <Route exact path="/" component={Home} />

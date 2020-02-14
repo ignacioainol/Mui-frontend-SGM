@@ -92,7 +92,7 @@ const MyNetwork = () => {
           size: 20,
           font: {
               size: 15,
-              color: '#ffffff'
+              color: '#000000'
           },
           borderWidth: 2
       },
