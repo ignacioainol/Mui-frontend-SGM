@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/';
 import Home from './components/Home/';
 import Administracion from './components/Administracion/';
+require('dotenv').config();
 
 const useStyles = makeStyles({
   root: {

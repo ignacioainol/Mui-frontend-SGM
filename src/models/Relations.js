@@ -5,24 +5,20 @@ class RelationRepository {
 
     static async getSystems () {
         try {
-            const res = await axios.get(`http://localhost:5001/relations/systems`)
-                // .then(res => {
-                //     const systems = res.data();
-                //     return systems;
-                // })
+            const response = await axios.get(`${process.env.REACT_APP_RESTURL_SPEAKERS}relations/systems`);
+            const data = response.data;
 
-                return Promise.resolve(await res.data());
-            
+            return Promise.resolve(data[0]);
+                  
         } catch (error) {
             return Promise.reject(error);
         }
-       
     }
 
     static async getDatabases (sys) {
         try {
-            const res = await fetch(`${process.env.RESTURL_SPEAKERS}relations/systems/${sys}/bd`);
-            const bd = await res.json();
+            const response = await axios.get(`${process.env.REACT_APP_RESTURL_SPEAKERS}relations/systems/${sys}/bd`);
+            const bd =  response.data;
             return Promise.resolve(bd);
         } catch (error) {
             return Promise.reject(error);
@@ -31,11 +27,9 @@ class RelationRepository {
 
     static async getSchemas (bd) {
         try {
-            const res = await fetch(`${process.env.RESTURL_SPEAKERS}relations/databases/${bd}/schemas`)
-                .then( res => {
-                    const systems = res.data;
-                    return systems;
-                })
+            const response = await axios.get(`${process.env.REACT_APP_RESTURL_SPEAKERS}relations/databases/${bd}/schemas`)
+            const schemas = response.data;
+            return Promise.resolve(schemas);
         } catch (error) {
             return Promise.reject(error);
         }
@@ -43,7 +37,7 @@ class RelationRepository {
 
     static async getObjects (schema) {
         try {
-            const res = await fetch(`${process.env.RESTURL_SPEAKERS}relations/schemas/${schema}/objects`);
+            const res = await fetch(`${process.env.REACT_APP_RESTURL_SPEAKERS}relations/schemas/${schema}/objects`);
             const objects = await res.json();
             return Promise.resolve(objects);
         } catch (error) {
@@ -53,7 +47,7 @@ class RelationRepository {
 
     static async getInfoObject (object) {
         try {
-            const res = await fetch(`${process.env.RESTURL_SPEAKERS}relations?filter=${JSON.stringify(object)}`);
+            const res = await fetch(`${process.env.REACT_APP_RESTURL_SPEAKERS}relations?filter=${JSON.stringify(object)}`);
             const obj = await res.json();
             return Promise.resolve(obj);
         } catch (error) {
@@ -63,7 +57,7 @@ class RelationRepository {
 
     static async getNameObject (object) {
         try{
-            const res = await fetch(`${process.env.RESTURL_SPEAKERS}relations/${object.system}/${object.db}/${object.schema}/${object.object}`);
+            const res = await fetch(`${process.env.REACT_APP_RESTURL_SPEAKERS}relations/${object.system}/${object.db}/${object.schema}/${object.object}`);
             const obj = await res.json();
             return Promise.resolve(obj);
         }
@@ -74,7 +68,7 @@ class RelationRepository {
 
     static async getValueObject (system, bd, schema, object, name) {
         try {
-            const res = await fetch(`${process.env.RESTURL_SPEAKERS}relations/${system}/${bd}/${schema}/${object}/${name}/value`);
+            const res = await fetch(`${process.env.REACT_APP_RESTURL_SPEAKERS}relations/${system}/${bd}/${schema}/${object}/${name}/value`);
             const obj = await res.json();
             return Promise.resolve(obj);
         } catch (error) {
@@ -84,7 +78,7 @@ class RelationRepository {
 
     static async getValueName (system, bd, schema, object, name) {
         try {
-            const res = await fetch(`${process.env.RESTURL_SPEAKERS}relations/${system}/${bd}/${schema}/${object}/${name}/Name`);
+            const res = await fetch(`${process.env.REACT_APP_RESTURL_SPEAKERS}relations/${system}/${bd}/${schema}/${object}/${name}/Name`);
             const obj = await res.json();
             return Promise.resolve(obj);
         } catch (error) {
@@ -94,7 +88,7 @@ class RelationRepository {
 
     static async getEstadistics (system) {
         try {
-            const res = await fetch(`${process.env.RESTURL_SPEAKERS}relations/${system}/estadistica`);
+            const res = await fetch(`${process.env.REACT_APP_RESTURL_SPEAKERS}relations/${system}/estadistica`);
             const obj = await res.json();
             return Promise.resolve(obj);
         } catch (error) {
@@ -105,7 +99,7 @@ class RelationRepository {
 
     static async modifyRelationsObject (id, object) {
         try {
-            const res = await fetch(`${process.env.RESTURL_SPEAKERS}relations/${id}`, { method: 'PUT', body: JSON.stringify(object), headers: {
+            const res = await fetch(`${process.env.REACT_APP_RESTURL_SPEAKERS}relations/${id}`, { method: 'PUT', body: JSON.stringify(object), headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
               } });
