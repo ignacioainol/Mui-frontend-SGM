@@ -87,7 +87,6 @@ export default function Navbar() {
           <Grid
             justify="space-between" // Add it here :)
             container
-            spacing={24}
           >
 
             <Grid item>

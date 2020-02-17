@@ -46,11 +46,12 @@ function Administracion() {
   const [openObject, setOpenObject] = React.useState(false);
   const [objeto, setObjeto] = React.useState([]);
 
-  useEffect(async () => {
-    const schemas = await RelationRepository.getSystems();
-    setSchemas(schemas);
-
-    console.log(bbdd);
+  useEffect(() => {
+    async function fetchData() {
+      const schemas = await RelationRepository.getSystems();
+      setSchemas(schemas);
+    }
+    fetchData();
   }, []);
 
   const handleChangeSystem = async (event) => {
@@ -59,7 +60,6 @@ function Administracion() {
       setValue(event.target.value);
       const ddbb = await RelationRepository.getDatabases(event.target.value);
       setBbdd(ddbb);
-      console.log(ddbb);
     } catch (error) {
       console.log(error);
     }
@@ -126,7 +126,6 @@ function Administracion() {
     setOpenObject(true);
   };
 
-  console.log(schemas);
   return (
     <div className={classes.root}>
       <Grid item>
@@ -167,8 +166,8 @@ function Administracion() {
                 <em>Seleccione...</em>
               </MenuItem>
 
-              {bbdd.map(bd =>
-                <MenuItem value={bd}>{bd}</MenuItem>
+              {bbdd.map((bd, index) =>
+                <MenuItem value={bd} key={index}>{bd}</MenuItem>
               )
               }
             </Select>
@@ -189,8 +188,8 @@ function Administracion() {
                 <em>Seleccione...</em>
               </MenuItem>
 
-              {esquema.map(schema =>
-                <MenuItem value={schema}>{schema}</MenuItem>
+              {esquema.map((schema, index) =>
+                <MenuItem value={schema} key={index}>{schema}</MenuItem>
               )
               }
             </Select>
@@ -211,8 +210,8 @@ function Administracion() {
                 <em>Seleccione...</em>
               </MenuItem>
 
-              {objeto.map(obj =>
-                <MenuItem value={obj}>{obj}</MenuItem>
+              {objeto.map((obj, index) =>
+                <MenuItem value={obj} key={index}>{obj}</MenuItem>
               )
               }
             </Select>
@@ -223,7 +222,7 @@ function Administracion() {
           </FormControl>
 
           <FormControl className={classes.formControl}>
-            <SearchIcon />
+            <SearchIcon style={{ fontSize: '2em' }} />
           </FormControl>
         </Paper>
       </Grid>
