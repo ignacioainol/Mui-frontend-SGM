@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import { Select, TextField } from '@material-ui/core/';
+import { Select, TextField, Button } from '@material-ui/core/';
 import RelationRepository from '../../models/Relations';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -222,7 +222,9 @@ function Administracion() {
           </FormControl>
 
           <FormControl className={classes.formControl}>
-            <SearchIcon style={{ fontSize: '2em' }} />
+            <Button variant="contained">
+              <SearchIcon style={{ fontSize: '2em' }} />
+            </Button>
           </FormControl>
         </Paper>
       </Grid>
