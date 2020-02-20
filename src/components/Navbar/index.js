@@ -103,7 +103,7 @@ export default function Navbar() {
                 </Button>
               </Link>
 
-              <Link to="/" color={'inherit'}>
+              <Link to="/estadisticas" color={'inherit'}>
                 <Button variant="contained" color="primary" className={classes.buttonMod} disableElevation>
                   Estadisticas
               </Button>

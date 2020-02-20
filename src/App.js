@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/';
 import Home from './components/Home/';
 import Administracion from './components/Administracion/';
+import Estadisticas from './components/Estadisticas/';
 require('dotenv').config();
 
 const useStyles = makeStyles({
@@ -21,6 +22,7 @@ function App() {
         <Navbar />
         <Route exact path="/" component={Home} />
         <Route path="/administracion" component={Administracion} />
+        <Route path="/estadisticas" component={Estadisticas} />
       </Router>
     </div>
   );
