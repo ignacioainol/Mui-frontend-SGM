@@ -8,15 +8,7 @@ import Estadisticas from './components/Estadisticas/';
 import Comparacion from './components/Comparacion/';
 require('dotenv').config();
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
-});
-
 function App() {
-
-  const classes = useStyles;
   return (
     <div style={{ backgroundColor: 'transparent', height: '100vh'}}>
       <Router>
