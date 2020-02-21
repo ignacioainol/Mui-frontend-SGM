@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/';
 import Home from './components/Home/';
 import Administracion from './components/Administracion/';
 import Estadisticas from './components/Estadisticas/';
+import Comparacion from './components/Comparacion/';
 require('dotenv').config();
 
 const useStyles = makeStyles({
@@ -23,6 +24,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/administracion" component={Administracion} />
         <Route path="/estadisticas" component={Estadisticas} />
+        <Route path="/comparacion" component={Comparacion} />
       </Router>
     </div>
   );

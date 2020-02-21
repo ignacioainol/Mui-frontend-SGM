@@ -10,7 +10,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import TableCool from './TableCool';
 
 import relationsRepository from '../../models/Relations';
 
@@ -34,7 +33,7 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-function Estadisticas() {
+function Comparacion() {
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
@@ -136,7 +135,6 @@ function Estadisticas() {
             </Snackbar>
 
             <div className={classes.root}>
-                <TableCool objectData={objectData} />
             </div>
 
         </div>
@@ -144,4 +142,4 @@ function Estadisticas() {
     )
 }
 
-export default Estadisticas;
+export default Comparacion;

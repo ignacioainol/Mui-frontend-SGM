@@ -63,6 +63,7 @@ export default function Navbar() {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorEl2, setAnchorEl2] = React.useState(null);
+  const [anchorEl3, setAnchorEl3] = React.useState(null);
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -72,12 +73,20 @@ export default function Navbar() {
     setAnchorEl2(event.currentTarget);
   };
 
+  const handleClick3 = event => {
+    setAnchorEl3(event.currentTarget);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
   const handleClose2 = () => {
     setAnchorEl2(null);
+  };
+
+  const handleClose3 = () => {
+    setAnchorEl3(null);
   };
 
   return (
@@ -109,7 +118,7 @@ export default function Navbar() {
               </Button>
               </Link>
 
-              <Link to="/" color={'inherit'}>
+              <Link to="/comparacion" color={'inherit'}>
                 <Button variant="contained" color="primary" className={classes.buttonMod} disableElevation>
                   Comparación
                 </Button>
