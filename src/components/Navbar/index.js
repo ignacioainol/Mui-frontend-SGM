@@ -195,6 +195,7 @@ export default function Navbar() {
                 </StyledMenuItem>
 
               </StyledMenu>
+              
             </Grid>
 
             <Grid item>

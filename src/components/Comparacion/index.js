@@ -6,12 +6,12 @@ import FormControl from '@material-ui/core/FormControl';
 import { Select, TextField, Button } from '@material-ui/core/';
 import InputLabel from '@material-ui/core/InputLabel';
 import RelationRepository from '../../models/Relations';
+import ComparacionRepository from '../../models/Comparation';
 import MenuItem from '@material-ui/core/MenuItem';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
-import relationsRepository from '../../models/Relations';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,9 +39,8 @@ function Comparacion() {
     const [open, setOpen] = React.useState(false);
     const [opensnackBar, setOpensnackBar] = React.useState(false);
     const [schemas, setSchemas] = React.useState([]);
-    const [systems, setSystems] = React.useState('');
+    const [object, setObject] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
-    const [objectData, setObjectData] = React.useState([]);
 
     useEffect(() => {
         async function fetchData() {
@@ -63,7 +62,9 @@ function Comparacion() {
     const handleChange = async (event) => {
 
         try {
-            setSystems(event.target.value);
+            let objectData = await ComparacionRepository.getObject(event.target.value);
+            setObject(objectData);
+
         } catch (error) {
             console.log(error);
         }
@@ -77,26 +78,13 @@ function Comparacion() {
         setOpensnackBar(false);
     };
 
-    const sendData = async (event) => {
-        if (systems == "" || systems == undefined) {
-            setOpensnackBar(true);
-        } else {
-            setLoading(true);
-            let object = await relationsRepository.getEstadistics(systems);
-            setObjectData(object);
-            setLoading(false);
-
-        }
-    }
 
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-                <h2>Estadisticas</h2>
-                <h3>Seleccione un sistema</h3>
+                <h2>Comparación</h2>
                 <Grid container>
-                    <Grid item xs={5}></Grid>
-                    <Grid item xs={1}>
+                    <Grid item>
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-controlled-open-select-label">Sistema</InputLabel>
                             <Select
@@ -105,7 +93,6 @@ function Comparacion() {
                                 open={open}
                                 onClose={handleClose}
                                 onOpen={handleOpen}
-                                value={systems}
                                 onChange={handleChange}
                             >
                                 <MenuItem>
@@ -116,12 +103,24 @@ function Comparacion() {
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Grid item xs={2}>
-                        <Button variant="contained" onClick={sendData} size="large" style={{ marginTop: '1em' }} color="primary">
-                            Buscar
-                            </Button>
+
+                    <Grid item>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel id="demo-controlled-open-select-label">Objecto</InputLabel>
+                            <Select
+                                labelId="demo-controlled-open-select-label"
+                                id="demo-controlled-open-select"
+                            >
+                                <MenuItem>
+                                    <em>Seleccione...</em>
+                                </MenuItem>
+
+                                { object.map((obj, index) =>
+                                    <MenuItem key={index} value={obj}>{obj}</MenuItem>
+                                )}
+                            </Select>
+                        </FormControl>
                     </Grid>
-                    <Grid item xs={4}></Grid>
                 </Grid>
             </Paper>
             {loading ?
