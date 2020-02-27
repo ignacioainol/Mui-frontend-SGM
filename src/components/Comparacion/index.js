@@ -8,9 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import RelationRepository from '../../models/Relations';
 import ComparacionRepository from '../../models/Comparation';
 import MenuItem from '@material-ui/core/MenuItem';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import Autocompletex from './Autocompletex';
 
 
 const useStyles = makeStyles(theme => ({
@@ -26,30 +24,62 @@ const useStyles = makeStyles(theme => ({
     formControl: {
         margin: theme.spacing(1),
         minWidth: 120,
+    },
+    autoCompletex: {
+        width: '200px !important'
     }
 }));
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 function Comparacion() {
     const classes = useStyles();
 
+    const [value, setValue] = React.useState('');
     const [open, setOpen] = React.useState(false);
-    const [opensnackBar, setOpensnackBar] = React.useState(false);
-    const [schemas, setSchemas] = React.useState([]);
+    const [systems, setSystems] = React.useState([]);
+
+
+    const [valueObj, setValueObj] = React.useState('');
+    const [openObj, setOpenObj] = React.useState(false);
     const [object, setObject] = React.useState([]);
-    const [loading, setLoading] = React.useState(false);
+
+    const [objectsName, setObjectsName] = React.useState([]);
 
     useEffect(() => {
         async function fetchData() {
-            const schemas = await RelationRepository.getSystems();
-            setSchemas(schemas);
+            const systems = await RelationRepository.getSystems();
+            setSystems(systems);
         }
         fetchData();
     }, []);
 
+
+    const handleChangeSystem = async (event) => {
+
+        try {
+            setValue(event.target.value);
+            let objectData = await ComparacionRepository.getObject(event.target.value);
+            setObject(objectData);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleChangeObj = async (event) => {
+        try {
+            setValueObj(event.target.value);
+
+            let params = {
+                system: value,
+                object: event.target.value
+            }
+
+            let nameObjectData = await ComparacionRepository.getNamesObjects(params);
+            setObjectsName(nameObjectData);
+
+        } catch (error) {
+            throw { error };
+        }
+    }
 
     const handleClose = () => {
         setOpen(false);
@@ -59,23 +89,12 @@ function Comparacion() {
         setOpen(true);
     };
 
-    const handleChange = async (event) => {
-
-        try {
-            let objectData = await ComparacionRepository.getObject(event.target.value);
-            setObject(objectData);
-
-        } catch (error) {
-            console.log(error);
-        }
+    const handleCloseObj = () => {
+        setOpenObj(false);
     };
 
-    const handleCloseSnackbar = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpensnackBar(false);
+    const handleOpenObj = () => {
+        setOpenObj(true);
     };
 
 
@@ -83,7 +102,10 @@ function Comparacion() {
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <h2>Comparación</h2>
-                <Grid container>
+                <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center">
                     <Grid item>
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-controlled-open-select-label">Sistema</InputLabel>
@@ -93,48 +115,48 @@ function Comparacion() {
                                 open={open}
                                 onClose={handleClose}
                                 onOpen={handleOpen}
-                                onChange={handleChange}
+                                value={value}
+                                onChange={handleChangeSystem}
                             >
                                 <MenuItem>
                                     <em>Seleccione...</em>
                                 </MenuItem>
 
-                                <MenuItem value={schemas}>{schemas}</MenuItem>
+                                <MenuItem value={systems}>{systems}</MenuItem>
                             </Select>
                         </FormControl>
                     </Grid>
 
                     <Grid item>
                         <FormControl className={classes.formControl}>
-                            <InputLabel id="demo-controlled-open-select-label">Objecto</InputLabel>
+                            <InputLabel id="demo-controlled-open-select-label">Objeto</InputLabel>
                             <Select
                                 labelId="demo-controlled-open-select-label"
                                 id="demo-controlled-open-select"
+                                open={openObj}
+                                onClose={handleCloseObj}
+                                onOpen={handleOpenObj}
+                                value={valueObj}
+                                onChange={handleChangeObj}
                             >
                                 <MenuItem>
                                     <em>Seleccione...</em>
                                 </MenuItem>
 
-                                { object.map((obj, index) =>
+                                {object.map((obj, index) =>
                                     <MenuItem key={index} value={obj}>{obj}</MenuItem>
                                 )}
+
                             </Select>
                         </FormControl>
                     </Grid>
+
+                    <Grid item>
+                        <Autocompletex objectsName={objectsName}/>
+                    </Grid>
                 </Grid>
             </Paper>
-            {loading ?
-                <LinearProgress color="secondary" />
-                : null}
 
-            <Snackbar open={opensnackBar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-                <Alert onClose={handleCloseSnackbar} severity="warning">
-                    Por favor seleccionar un sistema
-                </Alert>
-            </Snackbar>
-
-            <div className={classes.root}>
-            </div>
 
         </div>
 

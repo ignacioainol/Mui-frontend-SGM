@@ -22,6 +22,16 @@ class ComparacionRepository {
             return Promise.reject(error);
         }    
     }
+
+    static async getNamesObjects(params){
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_RESTURL_SPEAKERS}relations/${params.system}/${params.object}`);
+            const data = await response.data;
+            return Promise.resolve(data);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
 }
 
 export default ComparacionRepository;
