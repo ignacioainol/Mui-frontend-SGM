@@ -9,19 +9,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const objetos = [
-  { title: 'The Shawshank Redemption', year: 1994 },
-  { title: 'The Godfather', year: 1972 },
-  { title: 'The Godfather: Part II', year: 1974 },
-  { title: 'The Dark Knight', year: 2008 },
-  { title: '12 Angry Men', year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: 'Pulp Fiction', year: 1994 },
-  { title: 'Star Wars: Episode IV - A New Hope', year: 1977 },
-  { title: 'Saving Private Ryan', year: 1998 },
-  { title: 'Once Upon a Time in the West', year: 1968 },
-];
-
 export default function Autocompletex(props) {
 
   const { objectsName } = props;
@@ -32,10 +19,15 @@ export default function Autocompletex(props) {
     getOptionLabel: option => option,
   };
 
+  const dataSetChange = async (e) => {
+    
+}
+
   return (
     <Autocomplete
       style={{ marginTop: '-3px !important'}}
       {...defaultProps}
+      onChange={dataSetChange}
       id="clear-on-escape"
       clearOnEscape
       renderInput={params => <TextField className={classes.autoCompletex} {...params} label="Nombre de Objecto"

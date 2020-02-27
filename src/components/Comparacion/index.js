@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -9,6 +9,7 @@ import RelationRepository from '../../models/Relations';
 import ComparacionRepository from '../../models/Comparation';
 import MenuItem from '@material-ui/core/MenuItem';
 import Autocompletex from './Autocompletex';
+import SearchIcon from '@material-ui/icons/Search';
 
 
 const useStyles = makeStyles(theme => ({
@@ -32,6 +33,7 @@ const useStyles = makeStyles(theme => ({
 
 function Comparacion() {
     const classes = useStyles();
+    const valueObjNameRef = useRef();
 
     const [value, setValue] = React.useState('');
     const [open, setOpen] = React.useState(false);
@@ -42,6 +44,7 @@ function Comparacion() {
     const [openObj, setOpenObj] = React.useState(false);
     const [object, setObject] = React.useState([]);
 
+    const [valueObjName, setValueObjName] = React.useState([]);
     const [objectsName, setObjectsName] = React.useState([]);
 
     useEffect(() => {
@@ -98,6 +101,16 @@ function Comparacion() {
     };
 
 
+    const findData = async (event) => {
+        if(value == [] || valueObj == [] || objectsName == []){
+            alert("there can be no empty fields");
+        }else{
+            alert("we are good");
+
+        }
+    }
+
+
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
@@ -152,7 +165,16 @@ function Comparacion() {
                     </Grid>
 
                     <Grid item>
-                        <Autocompletex objectsName={objectsName}/>
+                        <Autocompletex
+                        objectsName={objectsName} />
+                    </Grid>
+
+                    <Grid>
+                        <FormControl className={classes.formControl}>
+                            <Button variant="contained" onClick={findData} size="large" style={{ marginTop: '1em' }} color="primary">
+                                <SearchIcon style={{ fontSize: '2em' }} />
+                            </Button>
+                        </FormControl>
                     </Grid>
                 </Grid>
             </Paper>

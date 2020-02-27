@@ -120,7 +120,7 @@ function Estadisticas() {
                     <Grid item xs={2}>
                         <Button variant="contained" onClick={sendData} size="large" style={{ marginTop: '1em' }} color="primary">
                             Buscar
-                            </Button>
+                        </Button>
                     </Grid>
                     <Grid item xs={4}></Grid>
                 </Grid>

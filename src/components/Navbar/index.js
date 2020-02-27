@@ -15,6 +15,9 @@ import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import crecicLogo from '../../images/crecicLogo.png';
 import { Typography, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import MusicVideoIcon from '@material-ui/icons/MusicVideo';
+
+
 
 const useStyles = makeStyles({
   buttonMod: {
@@ -99,7 +102,9 @@ export default function Navbar() {
           >
 
             <Grid item>
-              <IconButton edge="start" color="inherit" aria-label="menu"></IconButton>
+              <IconButton edge="start" color="inherit" aria-label="menu">
+                <MusicVideoIcon />
+              </IconButton>
               <Link to="/" color={'inherit'}>
                 <Button variant="contained" color="primary" className={classes.buttonMod} disableElevation>
                   Inicio
@@ -195,7 +200,7 @@ export default function Navbar() {
                 </StyledMenuItem>
 
               </StyledMenu>
-              
+
             </Grid>
 
             <Grid item>
