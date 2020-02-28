@@ -20,7 +20,7 @@ export default function Autocompletex(props) {
   };
 
   const dataSetChange = async (e) => {
-    
+    console.log(e.target.textContent);
 }
 
   return (
