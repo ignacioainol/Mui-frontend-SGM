@@ -6,6 +6,7 @@ import ComparacionRepository from '../../models/Comparation';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import MuiAlert from '@material-ui/lab/Alert';
 import SearchIcon from '@material-ui/icons/Search';
+import TableComparation from './TableComparation';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -50,6 +51,9 @@ function Comparacion() {
 
     /* Mensaje de alert */
     const [opensnackBar, setOpensnackBar] = React.useState(false);
+
+    /* Data table */
+    const [dataTable, setDatatable] = React.useState([]);
 
 
     useEffect(() => {
@@ -126,7 +130,7 @@ function Comparacion() {
             };
             const objeto = await ComparacionRepository.getDatos(searchData);
 
-            console.log(objeto);
+            setDatatable(objeto);
 
             setLoading(false);
         }
@@ -226,6 +230,15 @@ function Comparacion() {
                     Por favor seleccionar Sistema, objeto y Nombre de Objeto
                 </Alert>
             </Snackbar>
+
+            <div className={classes.root}>
+                {dataTable.length > 0 ?
+                    <TableComparation dataTable={dataTable} />
+                    : null
+                }
+            </div>
+
+
 
         </div>
 
