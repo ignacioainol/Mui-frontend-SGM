@@ -1,17 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import FormControl from '@material-ui/core/FormControl';
-import { Select, TextField, Button } from '@material-ui/core/';
-import InputLabel from '@material-ui/core/InputLabel';
+import { Select, TextField, Button, LinearProgress, MenuItem, InputLabel, FormControl, Grid, Paper, Snackbar } from '@material-ui/core/';
 import RelationRepository from '../../models/Relations';
 import ComparacionRepository from '../../models/Comparation';
-import MenuItem from '@material-ui/core/MenuItem';
-// import Autocompletex from './Autocompletex';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import MuiAlert from '@material-ui/lab/Alert';
 import SearchIcon from '@material-ui/icons/Search';
-
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -32,6 +26,10 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 function Comparacion() {
     const classes = useStyles();
 
@@ -46,6 +44,12 @@ function Comparacion() {
     /** State para completar array que se muestra en el autocomplete */
     const [objectsName, setObjectsName] = React.useState([]);
     const [valueObjName, setValueObjName] = React.useState([]);
+
+    /*Barra de loading*/
+    const [loading, setLoading] = React.useState(false);
+
+    /* Mensaje de alert */
+    const [opensnackBar, setOpensnackBar] = React.useState(false);
 
 
     useEffect(() => {
@@ -73,7 +77,6 @@ function Comparacion() {
         }
     };
 
-
     const handleChangeObj = async (event) => {
         try {
             setValueObj(event.target.value);
@@ -89,7 +92,7 @@ function Comparacion() {
         } catch (error) {
             throw { error };
         }
-    }
+    };
 
     const handleClose = () => {
         setOpen(false);
@@ -111,11 +114,11 @@ function Comparacion() {
         setValueObjName(event.target.textContent);
     }
 
-
     const findData = async (event) => {
         if (value == [] || valueObj == [] || valueObjName == 0) {
-            alert("esta null");
+            setOpensnackBar(true);
         } else {
+            setLoading(true);
             const searchData = {
                 sistema: value,
                 object: valueObj,
@@ -124,8 +127,18 @@ function Comparacion() {
             const objeto = await ComparacionRepository.getDatos(searchData);
 
             console.log(objeto);
+
+            setLoading(false);
         }
     }
+
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpensnackBar(false);
+    };
 
 
     return (
@@ -203,6 +216,16 @@ function Comparacion() {
                 </Grid>
             </Paper>
 
+            {loading ?
+                <LinearProgress color="secondary" />
+                : null
+            }
+
+            <Snackbar open={opensnackBar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+                <Alert onClose={handleCloseSnackbar} severity="warning">
+                    Por favor seleccionar Sistema, objeto y Nombre de Objeto
+                </Alert>
+            </Snackbar>
 
         </div>
 
