@@ -8,7 +8,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import RelationRepository from '../../models/Relations';
 import ComparacionRepository from '../../models/Comparation';
 import MenuItem from '@material-ui/core/MenuItem';
-import Autocompletex from './Autocompletex';
+// import Autocompletex from './Autocompletex';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search';
 
 
@@ -33,19 +34,19 @@ const useStyles = makeStyles(theme => ({
 
 function Comparacion() {
     const classes = useStyles();
-    const valueObjNameRef = useRef();
 
     const [value, setValue] = React.useState('');
     const [open, setOpen] = React.useState(false);
     const [systems, setSystems] = React.useState([]);
 
-
     const [valueObj, setValueObj] = React.useState('');
     const [openObj, setOpenObj] = React.useState(false);
     const [object, setObject] = React.useState([]);
 
-    const [valueObjName, setValueObjName] = React.useState([]);
+    /** State para completar array que se muestra en el autocomplete */
     const [objectsName, setObjectsName] = React.useState([]);
+    const [valueObjName, setValueObjName] = React.useState([]);
+
 
     useEffect(() => {
         async function fetchData() {
@@ -54,6 +55,11 @@ function Comparacion() {
         }
         fetchData();
     }, []);
+
+    const defaultProps = {
+        options: objectsName,
+        getOptionLabel: option => option,
+    };
 
 
     const handleChangeSystem = async (event) => {
@@ -66,6 +72,7 @@ function Comparacion() {
             console.log(error);
         }
     };
+
 
     const handleChangeObj = async (event) => {
         try {
@@ -100,12 +107,16 @@ function Comparacion() {
         setOpenObj(true);
     };
 
+    const changeAutocomplete = async (event) => {
+        setValueObjName(event.target.textContent);
+    }
+
 
     const findData = async (event) => {
-        if(value == [] || valueObj == [] || objectsName == []){
+        if (valueObjName == []) {
             alert("there can be no empty fields");
-        }else{
-            alert("we are good");
+        } else {
+            alert(valueObjName);
 
         }
     }
@@ -165,8 +176,15 @@ function Comparacion() {
                     </Grid>
 
                     <Grid item>
-                        <Autocompletex
-                        objectsName={objectsName} />
+                        <Autocomplete
+                            style={{ marginTop: '-3px !important' }}
+                            {...defaultProps}
+                            id="clear-on-escape"
+                            clearOnEscape
+                            onChange={changeAutocomplete}
+                            renderInput={params => <TextField className={classes.autoCompletex}  {...params} label="Nombre de Objecto"
+                            />}
+                        />
                     </Grid>
 
                     <Grid>
