@@ -113,11 +113,17 @@ function Comparacion() {
 
 
     const findData = async (event) => {
-        if (valueObjName == []) {
-            alert("there can be no empty fields");
+        if (value == [] || valueObj == [] || valueObjName == 0) {
+            alert("esta null");
         } else {
-            alert(valueObjName);
+            const searchData = {
+                sistema: value,
+                object: valueObj,
+                name: valueObjName
+            };
+            const objeto = await ComparacionRepository.getDatos(searchData);
 
+            console.log(objeto);
         }
     }
 

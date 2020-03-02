@@ -17,6 +17,10 @@ import { Typography, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import  MusicVideoIcon from '@material-ui/icons/MusicVideo';
 import HomeIcon from '@material-ui/icons/Home';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import CompareIcon from '@material-ui/icons/Compare';
+
 
 const useStyles = makeStyles({
   buttonMod: {
@@ -106,25 +110,25 @@ export default function Navbar() {
               </IconButton>
               <Link to="/" color={'inherit'}>
                 <Button variant="contained" color="primary" className={classes.buttonMod} disableElevation>
-                  <HomeIcon style={{marginTop: '-4px' }}/> Inicio
+                  <HomeIcon style={{marginTop: '-4px' }}/> &nbsp;Inicio
                 </Button>
               </Link>
 
               <Link to="/administracion" color={'inherit'}>
                 <Button variant="contained" color="primary" className={classes.buttonMod} disableElevation>
-                  Administración
+                <LibraryBooksIcon/> &nbsp;Administración
                 </Button>
               </Link>
 
               <Link to="/estadisticas" color={'inherit'}>
                 <Button variant="contained" color="primary" className={classes.buttonMod} disableElevation>
-                  Estadisticas
+                  <AssessmentIcon/> &nbsp;Estadisticas
               </Button>
               </Link>
 
               <Link to="/comparacion" color={'inherit'}>
                 <Button variant="contained" color="primary" className={classes.buttonMod} disableElevation>
-                  Comparación
+                  <CompareIcon/> &nbsp;Comparación
                 </Button>
               </Link>
 
