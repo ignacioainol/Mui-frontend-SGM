@@ -20,6 +20,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import CompareIcon from '@material-ui/icons/Compare';
+import FlashOnSharpIcon from '@material-ui/icons/FlashOnSharp';
 
 
 const useStyles = makeStyles({
@@ -27,8 +28,9 @@ const useStyles = makeStyles({
     backgroundColor: 'transparent',
     border: 0,
     color: 'white',
-    height: 40,
-    fontWeight: 'bold'
+    height: 30,
+    fontWeight: 'bold',
+    fontSize: 11
   },
 });
 
@@ -131,6 +133,10 @@ export default function Navbar() {
                   <CompareIcon/> &nbsp;Comparación
                 </Button>
               </Link>
+
+              <Button variant="contained" color="primary" href={'http://10.80.10.40:3004/form'} className={classes.buttonMod} disableElevation>
+                  <FlashOnSharpIcon/> &nbsp;Auditoria SGM
+              </Button>
 
               <Button
                 aria-controls="customized-menu"
