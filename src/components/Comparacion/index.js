@@ -6,7 +6,7 @@ import ComparacionRepository from '../../models/Comparation';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import MuiAlert from '@material-ui/lab/Alert';
 import SearchIcon from '@material-ui/icons/Search';
-import TableComparation from './TableComparation';
+import EnhancedTable from './TableComparation';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -225,8 +225,6 @@ function Comparacion() {
                 : null
             }
 
-            <TableComparation/>
-
             <Snackbar open={opensnackBar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
                 <Alert onClose={handleCloseSnackbar} severity="warning">
                     Por favor seleccionar Sistema, objeto y Nombre de Objeto
@@ -235,7 +233,7 @@ function Comparacion() {
 
             <div className={classes.root}>
                 {dataTable.length > 0 ?
-                    <TableComparation dataTable={dataTable} />
+                    <EnhancedTable dataTable={dataTable} />
                     : null
                 }
             </div>
