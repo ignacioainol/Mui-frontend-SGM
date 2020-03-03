@@ -21,8 +21,8 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(name, calories, fat, carbs) {
+  return { name, calories, fat, carbs };
 }
 
 const rows = [
@@ -32,7 +32,9 @@ const rows = [
   createData('Frozen yoghurt', 159, 6.0, 24),
   createData('Gingerbread', 356, 16.0, 49),
   createData('Honeycomb', 408, 3.2, 87),
-  createData('Ice cream sandwich', 237, 9.0, 37)
+  createData('Ice cream sandwich', 237, 9.0, 37),
+  createData('Jelly Bean', 375, 0.0, 94),
+  createData('KitKat', 518, 26.0, 65)
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -64,8 +66,8 @@ function stableSort(array, comparator) {
 const headCells = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Sistema' },
   { id: 'calories', numeric: true, disablePadding: false, label: 'Base Datos' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Esquemas' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Value' },
+  { id: 'fat', numeric: true, disablePadding: false, label: 'Esquema' },
+  { id: 'carbs', numeric: true, disablePadding: false, label: 'Value' }
 ];
 
 function EnhancedTableHead(props) {
@@ -78,6 +80,12 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
+          <Checkbox
+            indeterminate={numSelected > 0 && numSelected < rowCount}
+            checked={rowCount > 0 && numSelected === rowCount}
+            onChange={onSelectAllClick}
+            inputProps={{ 'aria-label': 'select all desserts' }}
+          />
         </TableCell>
         {headCells.map(headCell => (
           <TableCell
@@ -140,7 +148,7 @@ const EnhancedTableToolbar = props => {
   const { numSelected } = props;
 
   return (
-    <Toolbar style={{ marginTop: '2em' }}
+    <Toolbar
       className={clsx(classes.root, {
         [classes.highlight]: numSelected > 0,
       })}
@@ -185,7 +193,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2),
   },
   table: {
-    minWidth: 750,
+    minWidth: 500,
   },
   visuallyHidden: {
     border: 0,
