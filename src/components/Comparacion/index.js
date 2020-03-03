@@ -55,6 +55,11 @@ function Comparacion() {
     /* Data table */
     const [dataTable, setDatatable] = React.useState([]);
 
+    //new states :S
+    const [result, setResult] = React.useState([]);
+    const [dialog, setDialog] = React.useState(false);
+    const [compareDialog, setCompareDialog] = React.useState(false);
+
 
     useEffect(() => {
         async function fetchData() {
@@ -65,7 +70,7 @@ function Comparacion() {
     }, []);
 
     const defaultProps = {
-        options: objectsName,
+        options: result,
         getOptionLabel: option => option,
     };
 
@@ -91,7 +96,7 @@ function Comparacion() {
             }
 
             let nameObjectData = await ComparacionRepository.getNamesObjects(params);
-            setObjectsName(nameObjectData);
+            setResult(nameObjectData);
 
         } catch (error) {
             throw { error };
@@ -143,6 +148,18 @@ function Comparacion() {
 
         setOpensnackBar(false);
     };
+
+    const handleClickOpenCompare = () => {
+        setCompareDialog(true);
+    }
+
+    const handleClickOpen = () => {
+        setDialog(true);
+    }
+
+    const handleCloseCompare = () => {
+        setCompareDialog(false);
+    }
 
 
     return (
@@ -233,7 +250,14 @@ function Comparacion() {
 
             <div className={classes.root}>
                 {dataTable.length > 0 ?
-                    <TableComparation dataTable={dataTable} />
+                    <TableComparation
+                        celdas={result}
+                        openDialog={handleClickOpen}
+                        closeDialog={handleClose}
+                        dialogState={dialog}
+                        openCompare={handleClickOpenCompare}
+                        closeCompare={handleCloseCompare}
+                        compareState={compareDialog} />
                     : null
                 }
             </div>

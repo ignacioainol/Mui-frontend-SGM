@@ -1,11 +1,3 @@
-/* 
-Autor      : Camilo Bello - Iván Horstmeier
-Fecha      : 07-06-2019
-Descripción: Tabla que muestra los sistemas, bases de datos, esquemas y objeto.
-Return     : Tabla (JSX que es un lenguaje de javascript que usa react para retornar HTML).
-Parametros : Props, objeto con el resultado de busqueda.
-*/
-
 import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -22,12 +14,12 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import ModalValue from '../ModalValue';
+import ModalValue from './ModalValue';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import PositionedSnackbar from '../../utils/SnackBar';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Utilities from '../../../helper/utilities';
+import Utilities from '../../helpers/utilities';
 import ProgressLoad from '../../utils/ProgressLoad';
 
 var diff = require('diff-lines');
@@ -309,8 +301,8 @@ function TableComparation(props) {
   const editObject = (row) => event => {
     setCargado(true);
     setState(row);
-    setTimeout(function(){props.openDialog(), 2000});
-    setTimeout(function(){setCargado(false), 2000});
+    // setTimeout(function(){props.openDialog(), 2000});
+    // setTimeout(function(){setCargado(false), 2000});
   }
 
   const isSelected = name => selected.indexOf(name) !== -1;
