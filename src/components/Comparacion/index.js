@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Select, TextField, Button, LinearProgress, MenuItem, InputLabel, FormControl, Grid, Paper, Snackbar } from '@material-ui/core/';
 import RelationRepository from '../../models/Relations';
@@ -224,6 +224,8 @@ function Comparacion() {
                 <LinearProgress color="secondary" />
                 : null
             }
+
+            <TableComparation/>
 
             <Snackbar open={opensnackBar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
                 <Alert onClose={handleCloseSnackbar} severity="warning">
