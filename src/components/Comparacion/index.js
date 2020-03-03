@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Select, TextField, Button, LinearProgress, MenuItem, InputLabel, FormControl, Grid, Paper, Snackbar } from '@material-ui/core/';
 import RelationRepository from '../../models/Relations';
@@ -6,6 +6,7 @@ import ComparacionRepository from '../../models/Comparation';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import MuiAlert from '@material-ui/lab/Alert';
 import SearchIcon from '@material-ui/icons/Search';
+import TableComparation from './TableComparation';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -220,6 +221,8 @@ function Comparacion() {
                 <LinearProgress color="secondary" />
                 : null
             }
+
+            <TableComparation/>
 
             <Snackbar open={opensnackBar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
                 <Alert onClose={handleCloseSnackbar} severity="warning">
