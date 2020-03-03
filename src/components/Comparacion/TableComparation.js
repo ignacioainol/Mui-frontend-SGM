@@ -26,13 +26,13 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3)
+  createData('Cupcake', 305, 3.7, 67),
+  createData('Donut', 452, 25.0, 51),
+  createData('Eclair', 262, 16.0, 24),
+  createData('Frozen yoghurt', 159, 6.0, 24),
+  createData('Gingerbread', 356, 16.0, 49),
+  createData('Honeycomb', 408, 3.2, 87),
+  createData('Ice cream sandwich', 237, 9.0, 37)
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -62,11 +62,10 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+  { id: 'name', numeric: false, disablePadding: true, label: 'Sistema' },
+  { id: 'calories', numeric: true, disablePadding: false, label: 'Base Datos' },
+  { id: 'fat', numeric: true, disablePadding: false, label: 'Esquemas' },
+  { id: 'carbs', numeric: true, disablePadding: false, label: 'Value' },
 ];
 
 function EnhancedTableHead(props) {
@@ -79,12 +78,6 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
-          />
         </TableCell>
         {headCells.map(headCell => (
           <TableCell
