@@ -13,7 +13,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
+import {Checkbox, Button} from '@material-ui/core/';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -21,21 +21,9 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function createData( id, system, calories, fat, carbs) {
+function createData(id, system, calories, fat, carbs) {
     return { id, system, calories, fat, carbs };
 }
-
-// const rows = [
-//     createData('hola', 305, 3.7, 67),
-//     createData('hola2', 452, 25.0, 51),
-//     createData('hola3', 262, 16.0, 24),
-//     createData('hola4', 159, 6.0, 24),
-//     createData('hola5', 356, 16.0, 49),
-//     createData('hola6', 408, 3.2, 87),
-//     createData('hola7', 237, 9.0, 37),
-//     createData('hola8', 375, 0.0, 94),
-//     createData('hola9', 518, 26.0, 65)
-// ];
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -187,13 +175,13 @@ export default function EnhancedTable(props) {
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(true);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    const { dataTable} = props;
+    const { dataTable } = props;
 
     const rows = [];
 
-    if(dataTable != undefined){
-        for(let i = 0; i < dataTable.length; i++){
-            rows.push(createData(dataTable[i]._id, dataTable[i].SYSTEM, dataTable[i].BD, dataTable[i].SCHEMA, "HOALMUNDO" ));
+    if (dataTable != undefined) {
+        for (let i = 0; i < dataTable.length; i++) {
+            rows.push(createData(dataTable[i]._id, dataTable[i].SYSTEM, dataTable[i].BD, dataTable[i].SCHEMA, "HOALMUNDO"));
         }
     }
 
@@ -310,6 +298,12 @@ export default function EnhancedTable(props) {
                         </TableBody>
                     </Table>
                 </TableContainer>
+
+                <div style={{textAlign: 'center', margin: '2em'}}>
+                    <Button variant="contained" color="primary">
+                        Comparar
+                    </Button>
+                </div>
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
