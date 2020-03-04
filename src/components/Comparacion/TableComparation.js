@@ -65,6 +65,12 @@ function EnhancedTableHead(props) {
         onRequestSort(event, property);
     };
 
+    if(numSelected > 2){
+        alert("no wn no mas de dos");
+    }
+
+    console.log(numSelected);
+
     return (
         <TableHead>
             <TableRow>

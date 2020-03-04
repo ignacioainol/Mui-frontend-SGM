@@ -134,7 +134,7 @@ export default function Navbar() {
                 </Button>
               </Link>
 
-              <Button variant="contained" color="primary" href={'http://10.80.10.40:3004/form'} className={classes.buttonMod} disableElevation>
+              <Button variant="contained" color="primary" href={'http://10.80.10.40:3004/form'} target="_blank" className={classes.buttonMod} disableElevation>
                   <FlashOnSharpIcon/> &nbsp;Auditoria SGM
               </Button>
 

@@ -7,6 +7,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import MuiAlert from '@material-ui/lab/Alert';
 import SearchIcon from '@material-ui/icons/Search';
 import EnhancedTable from './TableComparation';
+// import EnhancedTable from './TableTest';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -213,7 +214,7 @@ function Comparacion() {
                     <Grid>
                         <FormControl className={classes.formControl}>
                             <Button variant="contained" onClick={findData}  size="large" style={{ marginTop: '1em' }} color="primary">
-                                Buscar
+                                <SearchIcon/>
                             </Button>
                         </FormControl>
                     </Grid>
