@@ -13,7 +13,8 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import {Checkbox, Button} from '@material-ui/core/';
+import { Checkbox, Button, SvgIcon } from '@material-ui/core/';
+import ModalValue from './ModalValue';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -21,8 +22,8 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function createData(id, system, calories, fat, carbs) {
-    return { id, system, calories, fat, carbs };
+function createData(id, system, ddbb, schema) {
+    return { id, system, ddbb, schema };
 }
 
 function descendingComparator(a, b, orderBy) {
@@ -53,9 +54,9 @@ function stableSort(array, comparator) {
 
 const headCells = [
     { id: 'system', numeric: false, disablePadding: true, label: 'Sistema' },
-    { id: 'calories', numeric: true, disablePadding: false, label: 'Base Datos' },
-    { id: 'fat', numeric: true, disablePadding: false, label: 'Esquema' },
-    { id: 'carbs', numeric: true, disablePadding: false, label: 'Value' }
+    { id: 'ddbb', numeric: true, disablePadding: false, label: 'Base Datos' },
+    { id: 'schema', numeric: true, disablePadding: false, label: 'Esquema' },
+    { id: 'value', numeric: true, disablePadding: false, label: 'Value' }
 ];
 
 function EnhancedTableHead(props) {
@@ -131,7 +132,7 @@ const EnhancedTableToolbar = props => {
     const { numSelected } = props;
 
     return (
-        <Toolbar>
+        <Toolbar style={{ marginTop: '2em'}}>
             <Typography className={classes.title} variant="h6" id="tableTitle">
                 Objetos
             </Typography>
@@ -170,7 +171,7 @@ const useStyles = makeStyles(theme => ({
 export default function EnhancedTable(props) {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('calories');
+    const [orderBy, setOrderBy] = React.useState('ddbb');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(true);
@@ -181,7 +182,7 @@ export default function EnhancedTable(props) {
 
     if (dataTable != undefined) {
         for (let i = 0; i < dataTable.length; i++) {
-            rows.push(createData(dataTable[i]._id, dataTable[i].SYSTEM, dataTable[i].BD, dataTable[i].SCHEMA, "HOALMUNDO"));
+            rows.push(createData(dataTable[i]._id, dataTable[i].SYSTEM, dataTable[i].BD, dataTable[i].SCHEMA));
         }
     }
 
@@ -233,6 +234,10 @@ export default function EnhancedTable(props) {
         setDense(event.target.checked);
     };
 
+    const getObject = (row)  => {
+            console.log(row);
+    }
+
     const isSelected = id => selected.indexOf(id) !== -1;
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -283,10 +288,17 @@ export default function EnhancedTable(props) {
                                             <TableCell component="th" id={labelId} scope="row" padding="none">
                                                 {row.system}
                                             </TableCell>
-                                            <TableCell align="right">{row.calories}</TableCell>
-                                            <TableCell align="right">{row.fat}</TableCell>
-                                            <TableCell align="right">{row.carbs}</TableCell>
-                                            <TableCell align="right">{row.protein}</TableCell>
+                                            <TableCell align="right">{row.ddbb}</TableCell>
+                                            <TableCell align="right">{row.schema}</TableCell>
+                                            <TableCell align="right">
+                                                <IconButton>
+                                                    <a onClick={event => getObject(row)}>
+                                                        <SvgIcon>
+                                                            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                                                        </SvgIcon>
+                                                    </a>
+                                                </IconButton>
+                                            </TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -299,7 +311,7 @@ export default function EnhancedTable(props) {
                     </Table>
                 </TableContainer>
 
-                <div style={{textAlign: 'center', margin: '2em'}}>
+                <div style={{ textAlign: 'center', margin: '2em' }}>
                     <Button variant="contained" color="primary">
                         Comparar
                     </Button>
@@ -318,6 +330,7 @@ export default function EnhancedTable(props) {
                 control={<Switch checked={dense} onChange={handleChangeDense} />}
                 label="Dense padding"
             /> */}
+            <ModalValue/>
         </div>
     );
 }

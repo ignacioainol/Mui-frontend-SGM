@@ -129,8 +129,8 @@ function Comparacion() {
                 name: valueObjName
             };
             const objeto = await ComparacionRepository.getDatos(searchData);
-
             setDatatable(objeto);
+
 
             setLoading(false);
         }
@@ -212,8 +212,8 @@ function Comparacion() {
 
                     <Grid>
                         <FormControl className={classes.formControl}>
-                            <Button variant="contained" onClick={findData} size="large" style={{ marginTop: '1em' }} color="primary">
-                                <SearchIcon style={{ fontSize: '2em' }} />
+                            <Button variant="contained" onClick={findData}  size="large" style={{ marginTop: '1em' }} color="primary">
+                                Buscar
                             </Button>
                         </FormControl>
                     </Grid>
